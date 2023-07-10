@@ -9,7 +9,9 @@ let products = JSON.parse(fs.readFileSync('./data/products.json', 'utf-8'))
 let productListHtml = fs.readFileSync('./src/views/products.html', 'utf-8');
 let productDetailHtml = fs.readFileSync('./src/views/product_details.html', 'utf-8');
 
-const server = http.createServer((request, response) => {
+const server = http.createServer();
+
+server.on('request', (request, response) => {
     let { pathname, query } = url.parse(request.url, true);
     console.log(pathname, query)
     if (request.url == '/' || pathname == '/home') {
